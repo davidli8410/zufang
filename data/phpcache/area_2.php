@@ -1,8 +1,8 @@
 <?php
 $data = array (
   'areaid' => '2',
-  'areaname' => '基督城',
-  'parentid' => '0',
+  'areaname' => '中区',
+  'parentid' => '1',
   'areaorder' => '2',
 );
 ?>

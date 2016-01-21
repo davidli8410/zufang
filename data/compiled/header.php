@@ -22,7 +22,7 @@
 <!-- Í·²¿ -->
 <div id="header" class="clearfix">
 <div class="logo">
-<a href="./"><img src="templates/<?php echo $CFG['tplname'];?>/images/logo.gif" /></a></div>
+<a href="./"><img src="templates/<?php echo $CFG['tplname'];?>/images/logo.png" height="60" width="180" /></a></div>
 <div class="quick_menu">
 <div class="bd">
 <form name="form" action="search.php" method="post">

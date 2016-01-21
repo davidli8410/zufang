@@ -4,7 +4,7 @@ $data = array (
   array (
     'id' => '1',
     'navname' => 'Ê×Ò³',
-    'url' => 'category.php',
+    'url' => 'index.php',
     'target' => '_self',
     'navorder' => '1',
   ),

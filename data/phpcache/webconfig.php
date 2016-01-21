@@ -1,10 +1,10 @@
 <?php
 $data = array (
   'webname' => '新西兰租房网',
-  'weburl' => 'http://localhost/shop',
-  'keywords' => '',
+  'weburl' => 'http://kiwifang.com',
+  'keywords' => '新西兰租房网',
   'copyright' => '新西兰租房网 版权所有',
-  'description' => '',
+  'description' => '新西兰租房网',
   'banwords' => '',
   'icp' => '',
   'qq' => '',
@@ -12,7 +12,7 @@ $data = array (
   'comment_check' => '0',
   'count' => '',
   'tplname' => 'phpmps',
-  'crypt' => '279715c394ae51f653e03a58d87de8fe',
+  'crypt' => '9a0462690501f341bcbf0f8700318a96',
   'maxpost' => '15',
   'annouce' => '',
   'rewrite' => '0',
@@ -68,6 +68,6 @@ $data = array (
   'com_thumbwidth' => '200',
   'com_thumbheight' => '80',
   'testemail' => '',
-  'token' => '279715c394ae51f653e03a58d87de8fe',
+  'token' => '9a0462690501f341bcbf0f8700318a96',
 );
 ?>
