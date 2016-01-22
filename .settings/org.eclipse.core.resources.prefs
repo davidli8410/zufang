@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//templates/phpmps/category-1.htm=GBK
+encoding//templates/phpmps/category.htm=GBK
+encoding//templates/phpmps/index.htm=GBK
 encoding/<project>=GBK
 encoding/category.php=GBK
 separateDerivedEncodings=true
