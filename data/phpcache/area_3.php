@@ -1,8 +1,0 @@
-<?php
-$data = array (
-  'areaid' => '3',
-  'areaname' => 'ÄÏÇø',
-  'parentid' => '1',
-  'areaorder' => '3',
-);
-?>

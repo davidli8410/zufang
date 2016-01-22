@@ -1,13 +1,13 @@
 <?php
 $db_host   = "localhost";
 
-$db_name   = "shop";
+$db_name   = "sgieltsc_fang";
 
 $db_user   = "root";
 
 $db_pass   = "";
 
-$table     = "phpmps_";
+$table     = "fang_";
 
 $charset   = "gb2312";
 
