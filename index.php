@@ -219,10 +219,10 @@ $cat_pro = get_info($cats, $areas, '8', 'pro','','10'); //推荐信息
 $cat_hot = get_info($cats, $areas, '8', '','click','10'); //热门信息
 
 $here = get_here($here_arr);
-$seo['title'] = $area_info['areaname'] . $cat_info['catname'] . '信息列表 - Powered by Phpmps';
-$seo['keywords'] = $area_info['areaname'].$cat_info['keywords'];
-$seo['description'] = $cat_info['description'];
+$seo['title'] = '新西兰租房 - 新西兰租房网';
+$seo['keywords'] = '新西兰租房 - 新西兰租房网';
+$seo['description'] = '新西兰租房 - 新西兰租房网';
 
-$template = $cat_info['cattplname'] ? $cat_info['cattplname'] : 'category';
+$template="index";
 include template($template);
 ?>
