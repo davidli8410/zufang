@@ -69,9 +69,9 @@ $here_arr[] = array('name'=>$catname, 'url'=>url_rewrite('category',array('cid'=
 $here_arr[] = array('name'=>$title);
 $here = get_here($here_arr);
 
-$seo['title']   = $title . ' - Powered by Phpmps';
-$seo['keywords']  = !empty($keywords) ? $keywords : cut_str($title,'5');
-$seo['description'] = !empty($description) ? $description : cut_str(strip_tags($content),50);
+$seo['title']   = '新西兰租房 - 新西兰租房网 - 	' . $title ;
+$seo['keywords']  = '新西兰租房 - 新西兰租房网 - 	' . $title ;
+$seo['description'] = '新西兰租房 - 新西兰租房网 - 	' . $title ;
 
 $cat_info = get_cat_info($catid);
 $template = $cat_info['viewtplname'] ? $cat_info['viewtplname'] : 'view';
