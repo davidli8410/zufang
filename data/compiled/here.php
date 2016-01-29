@@ -1,1 +1,0 @@
-<?php if(!defined('IN_PHPMPS'))die('Access Denied'); ?><div class="ur_here" style="text-align:left; ">&nbsp;&nbsp;µ±«∞Œª÷√£∫<?php echo $here;?> </div>
