@@ -1,0 +1,86 @@
+
+
+	<div id="top_bar">
+		<div class="change_city">
+			{loop $areas_list $val}
+			<a href="{$val[url]}">{$val[areaname]}</a>&nbsp;&nbsp;
+			{/loop}
+		</div>
+		<div class="site_service">
+			<!--{if $_userid}-->
+			&nbsp;&nbsp;欢迎你：{$_username}
+			&nbsp;&nbsp;<a href="member.php">[个人中心]</a>
+			{if $_status<=0}&nbsp;&nbsp;<a href="member.php?act=send_check_email"><font color='red'>[验证邮件]</font></a>{/if}
+			&nbsp;&nbsp;<a href="member.php?act=logout&mid={$_userid}">[退出]</a>
+			<!--{else}-->
+			<font color="red"><a href="member.php?act=login&refer={$PHP_URL}">[登录]</a></font>&nbsp;
+			<font color="red"><a href="member.php?act=register">[注册]</a></font>&nbsp;
+			<!--{/if}-->
+		</div>
+	</div>
+	<!-- topBar 结束 -->
+	<!-- 头部 -->
+	<div id="header" class="clearfix">
+		<div class="logo">
+		<a href="./"><img src="templates/{$CFG[tplname]}/images/logo.png" height="60" width="180" /></a></div>
+		<div class="quick_menu">
+			<div class="bd">
+				<form name="form" action="search.php" method="post">
+				<input type="text" name="keywords" id="keywords" style="height:20px;" size="50"> 
+				<input type="submit" name="search" style="height:25px" value="&nbsp;搜 索&nbsp;">
+				</form>
+			</div>
+		</div>
+		<div class="post"><a href="{$CFG[postfile]}"><img src="templates/{$CFG[tplname]}/images/post.gif" alt="免费发布信息" border="0" ></a></div>
+	</div>
+	<!-- 头部 结束 -->
+	<!-- 主导航 -->
+	<div id="nav">
+		<div class="nav_zone">
+			<ul>
+				<!--{loop $nav $nav}--><li><a href="{$nav[url]}" target="{$nav[target]}">{$nav[navname]}</a></li><!--{/loop}-->
+			</ul>
+		</div>
+		<!-- 公告 -->
+		{if $CFG['annouce']}
+		<div class="search_box">
+			<div class="bd clearfix">
+            <div class="location"><b>公告：</b>{$CFG['annouce']}</div>
+		</div>
+		{/if}
+		<!-- 公告 结束 -->
+	</div>
+	<!-- 主导航结束 -->
+	
+	
+<div class="navbar navbar-inverse navbar-fixed-top" style="z-index:2;">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-navbar-collapse" type="button">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div class="navbar-header"><a class="navbar-brand" href="#">新西兰租房网</a></div>
+</div>
+<div class="navbar-collapse collapse bs-navbar-collapse">
+
+<ul class="nav navbar-nav navbar-right" id="navbar-right-links">
+<li><a href="{$CFG[postfile]}" id="post_ad_link"><span class="glyphicon glyphicon-edit"></span>&nbsp;免费发布</a></li>
+
+<!--{if $_userid}-->
+<li class="before-login-link"><a href="member.php">欢迎你：{$_username}</a></li>
+{if $_status<=0}
+<li class="before-login-link" id="login_link"><a href="member.php?act=send_check_email">[验证邮件]</a></li>
+{/if}
+<li class="before-login-link"><a href="member.php?act=logout&mid={$_userid}">[退出]</a></li>
+<!--{else}-->
+<li class="before-login-link" id="login_link"><a href="member.php?act=login&refer={$PHP_URL}">登录</a></li>
+<li class="before-login-link" id="register_link"><a href="member.php?act=register">注册</a></li>
+<!--{/if}-->
+
+
+</ul>
+</div>
+</div>
+</div>

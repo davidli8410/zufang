@@ -1,59 +1,159 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-<title>会员登陆</title>
-<meta http-equiv="Content-Type" content="text/html"></meta>
-<link href="templates/{$CFG[tplname]}/style/reset.css" type="text/css" rel="stylesheet" />
-<link href="templates/{$CFG[tplname]}/style/style.css" type="text/css" rel="stylesheet" />
-<link href="templates/{$CFG[tplname]}/style/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="templates/{$CFG[tplname]}/style/reg.css" type="text/css" rel="stylesheet" />
-<link href="templates/{$CFG[tplname]}/style/category.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/validator/validator.min.js"></script>
-<link href="js/validator/validator.css" type="text/css" rel="stylesheet" />
-</head>
-<div class="wrapper">
-<!--{template header}-->
-	<!-- 主体 -->
-	<div id="content">
-		<div id="regk">
-		<form name="form1" method="post" action="member.php?act=act_login" >
-		<div id="regz"> 用户登陆：</div>
-			<div class="regc">
-				<div class="regc_1 clearfix"><span class="left"><span class="red">*</span>用户名：</span><input class="input0" type="text" id="username" name="username" /></div>
-				<div class="regc_1 clearfix"><span class="left"><span class="red">*</span>密码：</span><input class="input0" type="password" id="password" name="password" /></div>
-				<div class="regc_1 clearfix"><span class="left"><span class="red">*</span>问题验证</span>
-                <input type="text" name="answer" id="answer" size="20" class="textInt"/>
-				<input type="hidden" id="vid" name="vid" value={$verf[vid]} />
-				问题：{$verf[question]}？&nbsp;<span id=imgid></span><span id=c_checkver></span>
-				</div>
-				<div class="regc_1 clearfix">
-				<input type="hidden" name="refer" value="{$refer}" />
-				<input type="submit" id="submit" name="submit" value="登录" />&nbsp;&nbsp;还没有账号？请 <a href="member.php?act=register" >注册</a>&nbsp;&nbsp;&nbsp;&nbsp;忘记密码？<a href="member.php?act=get_password">点此处</a>找回
+<div id="login_modal" class="modal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4>用户登录</h4>
+			</div>
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="form-title">
+					<span class="text" id="login_modal_msg">请输入您的账号和密码</span>
 				</div>
 			</div>
-		</form>
+			<form class="form-horizontal form-in-modal" onsubmit="return false">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="text" class="form-control" id="login_email"
+							placeholder="账号">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="password" class="form-control" id="login_password"
+							placeholder="密码">
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label" for="inputError"></label>
+					</div>
+				</div>
+				<div class="modal-message">
+					<img src="templates/{$CFG[tplname]}/images/indicator_small.gif" id="login_indicator"
+						class="modal-indicator"><span id="login_result_msg"></span>
+					<ul id="login-error-msg-list" style="color: red;">
+						<ul>
+						</ul>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<span class="forgot_password pull-left"><a
+						class="trigger_forgot_password" href="javascript:void(0)">忘记密码？</a></span>
+					<span class="forgot_password pull-left">&nbsp;&nbsp;没有账户？&nbsp;&nbsp;<a
+						class="trigger_register" href="javascript:void(0)">注册</a></span> <input
+						type="submit" name="submit" value="登录" class="btn btn-primary"
+						id="login_button_id">
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
 
-<!-- //  -->
-<div class="phpmpslogin"><!--{template footer}--></div>
-<script type="text/javascript">
-$.validator("username")
-.setRequired("请填写用户名。")
-.setServerCharset("GBK")
-.setStrlenType("byte")
 
-$.validator("password")
-.setRequired("请填写密码。")
-.setServerCharset("gbk")
-.setStrlenType("symbol")
+<div id="forgot_password_modal" class="modal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4>找回密码</h4>
+			</div>
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="form-title">
+					<span class="text">请输入邮箱</span>
+				</div>
+			</div>
+			<form class="form-horizontal form-in-modal" onsubmit="return false">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="email" class="form-control" id="forgot_email"
+							placeholder="邮箱">
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label" for="inputError"></label>
+					</div>
+				</div>
+				<div class="modal-message">
+					<img src="templates/{$CFG[tplname]}/images/indicator_small.gif" id="forgot_indicator"
+						class="modal-indicator"> <span id="forgot_result_msg"></span>
+					<ul id="forgot-error-msg-list" style="color: red;">
+						<ul>
+						</ul>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<input type="submit" name="submit" value="提交"
+						class="btn btn-primary" id="forgot_password_button_id">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
-$.validator("answer")
-.setRequired("请填写问题验证。")
-.setAjax("do.php?act=ver&vid="+$('#vid').val(), "回答不正确。");
-</script>
-</body>
-</html>
+
+<div id="register_modal" class="modal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h4>注册</h4>
+			</div>
+			<form class="form-horizontal form-in-modal" onsubmit="return false">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="text" class="form-control" id="register_username"
+							placeholder="用户名">
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label" for="inputError"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="email" class="form-control" id="register_email"
+							placeholder="邮箱">
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label" for="inputError"></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1 modal-row-title-div">
+						<span class="modal-row-title-text">账户类型</span>
+					</div>
+					<div class="col-sm-4 col-sm-offset-1">
+						<input type="radio" name="usertype_radios" id="r" value="r"
+							style="margin: 0 10px;" checked="">个人
+					</div>
+					<div class="col-sm-6">
+						<input type="radio" name="usertype_radios" id="a" value="a"
+							style="margin: 0 10px;">中介（可以同时发布更多广告）
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<input type="password" class="form-control" id="register_password"
+							placeholder="密码">
+					</div>
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label" for="inputError"></label>
+					</div>
+				</div>
+				<div class="modal-message">
+					<img src="templates/{$CFG[tplname]}/images/indicator_small.gif" id="register_indicator"
+						class="modal-indicator"> <span id="register_result_msg"></span>
+					<ul id="register-error-msg-list" style="color: red;">
+						<ul>
+						</ul>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<span class="forgot_password pull-left">已经有账户？&nbsp;&nbsp;<a
+						class="trigger_login" href="javascript:void(0)">登录</a></span> <input
+						type="submit" name="submit" value="注册" class="btn btn-primary"
+						id="register_button_id">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

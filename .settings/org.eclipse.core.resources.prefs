@@ -1,7 +1,15 @@
 eclipse.preferences.version=1
-encoding//templates/phpmps/category-1.htm=GBK
+encoding//admin/templates/login.htm=GBK
+encoding//templates/phpmps/*.htm=GBK
 encoding//templates/phpmps/category.htm=GBK
+encoding//templates/phpmps/footer.htm=GBK
+encoding//templates/phpmps/header.htm=GBK
 encoding//templates/phpmps/index.htm=GBK
+encoding//templates/phpmps/login.htm=GBK
+encoding//templates/phpmps/view.htm=GBK
+encoding//templates/phpmps2/header.htm=GBK
+encoding//templates/phpmps2/index.htm=GBK
+encoding//templates/phpmps2/login.htm=GBK
 encoding/<project>=GBK
 encoding/category.php=GBK
 separateDerivedEncodings=true
