@@ -77,7 +77,6 @@ $(function() {
 //				} else {
 //					$("#login_email").parent().removeClass("has-error")
 //				}
-				$("#login_email").parent().removeClass("has-error")
 				if (password.length < PASSWORD_MIN_LENGTH
 						|| password.length > PASSWORD_MAX_LENGTH) {
 					$("#login_password").parent().addClass("has-error");
@@ -103,8 +102,8 @@ $(function() {
 						|| username.length > USERNAME_MAX_LENGTH) {
 					$("#register_username").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					var a = b.format(username_error_msg);
-					$("#register-error-msg-list").append(a);
+					//var a = b.format(username_error_msg);
+					$("#register-error-msg-list").append(username_error_msg);
 					pass = false
 				} else {
 					$("#register_username").parent().removeClass("has-error")
@@ -112,8 +111,8 @@ $(function() {
 				if (validateEmail(email) == false) {
 					$("#register_email").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					var a = b.format(email_error_msg);
-					$("#register-error-msg-list").append(a);
+					//var a = b.format(email_error_msg);
+					$("#register-error-msg-list").append(email_error_msg);
 					pass = false
 				} else {
 					$("#register_email").parent().removeClass("has-error")
@@ -122,8 +121,8 @@ $(function() {
 						|| password.length > PASSWORD_MAX_LENGTH) {
 					$("#register_password").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					var a = b.format(password_error_msg);
-					$("#register-error-msg-list").append(a);
+					//var a = b.format(password_error_msg);
+					$("#register-error-msg-list").append(password_error_msg);
 					pass = false
 				} else {
 					$("#register_password").parent().removeClass("has-error")
@@ -161,7 +160,7 @@ $(function() {
 		$("#login_result_msg").removeClass("result-text-green");
 		$("#login_result_msg").text(login_form_inprogress_str);
 		$("#login_button_id").attr("disabled", "true");
-		$.post("/zufang/login.php?act=act_login", {
+		$.post("/login.php?act=act_login", {
 			username_or_email : b,
 			password : a
 		}, function(c) {
@@ -185,7 +184,7 @@ $(function() {
 						$("#login_modal").modal("hide")
 					}, 1500);
 					if (c.login_status == "SCMD_LOGIN_SUCCEED") {
-						location.reload()
+						location.reload();
 					} else {
 						window.location = "/web/account/"
 					}
@@ -207,12 +206,11 @@ $(function() {
 		user_type = $("input[name*='usertype_radios']:checked").val();
 		$.ajax({
 			type : "POST",
-			url : "/web/register/",
+			url : "/register.php?act=act_register",
 			data : {
 				username : c,
 				email : b,
-				password : a,
-				user_type : user_type
+				password : a
 			},
 			success : function(d) {
 				$("#register_indicator").css("display", "none");
@@ -239,8 +237,8 @@ $(function() {
 							$("#register_result_msg").text(
 									register_form_correct_str);
 							setTimeout(function() {
-								window.location = "/web/account/"
-							}, 4000)
+								location.reload();
+							}, 500);
 						} else {
 							$("#register_result_msg").removeClass(
 									"result-text-green");
