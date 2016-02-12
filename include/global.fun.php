@@ -1561,6 +1561,13 @@ function check_user($username, $password = '')
 	return $db->getOne($sql);
 }
 
+function check_email($email)
+{
+	global $db,$table,$CFG;
+	$sql = "select userid FROM {$table}member  WHERE email = '$email'";
+	return $db->getOne($sql);
+}
+
 function logout()
 {
 	set_session();
@@ -1614,13 +1621,13 @@ function register($username, $password, $email)
 {
 	global $db,$table,$CFG;
 
-	if (check_user($username) > 0) {
-		showmsg("用户名 $username 已经存在");
-	}
-	$sql = "select userid FROM {$table}member  WHERE email = '$email'";
-	if ($db->getOne($sql) > 0) {
-		showmsg("邮箱 $email 已经存在");
-	}
+// 	if (check_user($username) > 0) {
+// 		showmsg("用户名 $username 已经存在");
+// 	}
+// 	$sql = "select userid FROM {$table}member  WHERE email = '$email'";
+// 	if ($db->getOne($sql) > 0) {
+// 		showmsg("邮箱 $email 已经存在");
+// 	}
 
 	$time = time();
 	$ip = get_ip();
