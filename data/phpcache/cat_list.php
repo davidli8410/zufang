@@ -7,17 +7,17 @@ $data = array (
     'caturl' => 'category.php?id=1',
     'children' => 
     array (
-      9 => 
-      array (
-        'id' => '9',
-        'name' => '单间出租',
-        'url' => 'category.php?id=9',
-      ),
       8 => 
       array (
         'id' => '8',
         'name' => '整套出租',
         'url' => 'category.php?id=8',
+      ),
+      9 => 
+      array (
+        'id' => '9',
+        'name' => '单间出租',
+        'url' => 'category.php?id=9',
       ),
     ),
   ),

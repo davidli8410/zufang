@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>新西兰租房网,奥克兰租房网,新西兰搜房网,奥克兰租房</title>
-<meta content="新西兰租房,新西兰出租,狮城租房,单间出租,HDB出租,公寓出租,短期租房,狮城论坛,狮城网,新新网"
+<meta content="新西兰租房,新西兰出租,狮城租房,单间出租,整租,公寓出租,短期租房,奥克兰租房,新西兰租房网,奥克兰租房网"
 	name="keywords">
-<meta content="新西兰最大的租房网站，免费发布、搜索新西兰出租信息。HDB出租、公寓出租、单间出租、整套出租。"
+<meta content="新西兰最大的租房网站，免费发布、搜索新西兰出租信息。house出租、公寓出租、单间出租、整套出租。"
 	name="description">
 <meta content="index,follow" name="robots">
 <meta content="index,follow" name="GOOGLEBOT">
@@ -17,7 +17,18 @@
 <link rel="stylesheet" href="templates/{$CFG[tplname]}/css/fang.css" type="text/css">
 
 <script type="text/javascript" src="templates/{$CFG[tplname]}/js/e52a1e59defa.js"></script>
+<script type="text/javascript" src="templates/{$CFG[tplname]}/js/cf9075143b4c.js"></script>
 <script type="text/javascript" src="templates/{$CFG[tplname]}/js/fang.js"></script>
+
+<script type="text/javascript">
+
+	var show_popover = false;
+	var rental_form_error_str = "请输入数字";
+	var rental_form_correct_str = "输入最低/最高价格";
+
+	var preload = true;
+</script>
+
 
 </head>
 <body style="padding-top: 55px;">
@@ -28,95 +39,40 @@
 	<div class="container main-shadow">
 		<div class="row search-block">
 			<div class="col-sm-12">
+			
 				<div class="row search-tab-row">
 					<ul class="nav nav-tabs" id="searchTab">
 						<li class="active tab-ui search-tab"><a
-							href="http://localhost/zufang/#region-selection"
-							data-toggle="tab"><b>区域</b></a></li>
+							href="http://localhost/"
+							data-toggle="tab"><b>奥克兰</b></a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane two-level-selection-block active"
 							id="region-selection">
 							<div class="two-level-selection-header">
-								<div class="two-level-selection-item-selected" id="#central">奥克兰</div>
-								<!--{loop $area_arr $val}-->
-								<div class="two-level-selection-item" id="#area_{$val[id]}">{$val[areaname]}</div>
+								<!--{loop $area_parents $val}-->
+								<div class="two-level-selection-item" id="#area_{$val[areaid]}">{$val[areaname]}</div>
 								<!--{/loop}-->
 							</div>
-							<div class="two-level-selection-pane-inactive" id="east">
-								<div class="text-selection-block">
-									<div class="text-selection-item-selected all-selection"
-										id="all-region-east">全部</div>
-									<div class="text-selection-item" id="Bedok">勿洛</div>
-									<div class="text-selection-item" id="Changi">樟宜</div>
-									<div class="text-selection-item" id="Paya Lebar">巴耶利峇</div>
-									<div class="text-selection-item" id="Pasir Ris">巴西立</div>
-									<div class="text-selection-item" id="Tampines">淡滨尼</div>
-								</div>
-							</div>
-							<div class="two-level-selection-pane-inactive" id="northeast">
-								<div class="text-selection-block">
-									<div class="text-selection-item-selected all-selection"
-										id="all-region-northeast">全部</div>
-									<div class="text-selection-item" id="Ang Mo Kio">宏茂桥</div>
-									<div class="text-selection-item" id="Hougang">后港</div>
-									<div class="text-selection-item" id="Punggol">榜鹅</div>
-									<div class="text-selection-item" id="Seletar">实里达</div>
-									<div class="text-selection-item" id="Sengkang">盛港</div>
-									<div class="text-selection-item" id="Serangoon">实龙岗</div>
-								</div>
-							</div>
-							<div class="two-level-selection-pane-inactive" id="north">
-								<div class="text-selection-block">
-									<div class="text-selection-item-selected all-selection"
-										id="all-region-north">全部</div>
-									<div class="text-selection-item" id="Lim Chu Kang">林厝港</div>
-									<div class="text-selection-item" id="Mandai">万礼</div>
-									<div class="text-selection-item" id="Sembawang">三巴旺</div>
-									<div class="text-selection-item" id="Woodlands">兀兰</div>
-									<div class="text-selection-item" id="Yishun">义顺</div>
-								</div>
-							</div>
-							<div class="two-level-selection-pane-active" id="central">
-								<div class="text-selection-block">
-									<div class="all-selection text-selection-item-selected"
-										id="all-region-central">全部</div>
-									<div class="text-selection-item" id="Bishan">Penrose</div>
-									<div class="text-selection-item" id="Bukit Merah">One
-										tree hill</div>
-									<div class="text-selection-item" id="Bukit Timah">Mt
-										Wellington</div>
-									<div class="text-selection-item" id="Geylang">New lynn</div>
-									<div class="text-selection-item" id="Kallang">Mt eden</div>
-									<div class="text-selection-item" id="Marine Parade">Mt
-										eden</div>
-									<div class="text-selection-item" id="Novena">Mt eden</div>
-									<div class="text-selection-item" id="Queenstown">Mt eden</div>
-									<div class="text-selection-item" id="Tanglin">Silva Park</div>
-									<div class="text-selection-item" id="Toa Payoh">Mt eden</div>
-									<div class="text-selection-item" id="CBD">Mt eden</div>
-									<div class="text-selection-item" id="Newton">Mt eden</div>
-									<div class="text-selection-item" id="Orchard">Mt eden</div>
-									<div class="text-selection-item" id="Outram">Mt eden</div>
-								</div>
-							</div>
-							<div class="two-level-selection-pane-inactive" id="west">
+							
+							<!--{loop $area_children $parent_id $child}-->
+							<div class="two-level-selection-pane-inactive" id="area_{$parent_id}">
 								<div class="text-selection-block">
 									<div class="text-selection-item-selected all-selection"
 										id="all-region-west">全部</div>
-									<div class="text-selection-item" id="Bukit Batok">武吉巴督</div>
-									<div class="text-selection-item" id="Bukit Panjang">武吉班让</div>
-									<div class="text-selection-item" id="Boon Lay">文礼</div>
-									<div class="text-selection-item" id="Choa Chu Kang">蔡厝港</div>
-									<div class="text-selection-item" id="Clementi">金文泰</div>
-									<div class="text-selection-item" id="Jurong East">裕廊东</div>
-									<div class="text-selection-item" id="Jurong West">裕廊西</div>
-									<div class="text-selection-item" id="Pioneer">先驱</div>
+									<!--{loop $child $val}-->
+									<div class="text-selection-item" id="{$val[areaname]}">{$val[areaname]}</div>
+									<!--{/loop}-->
 								</div>
 							</div>
+							<!--{/loop}-->
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
 				<div class="row search-condition-row">
 					<div class="col-sm-2 col-xs-2 row-title-div">
 						<span class="search-condition-row-title">租期</span>
@@ -176,6 +132,11 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		
+		
 		<div class="row post-panel">
 			<div class="col-sm-12">
 				<div class="result-block" id="post-list">
@@ -278,6 +239,8 @@
 		
 		var region_prefix = "区域："
 		var mrt_prefix = "MRT: "
+		
+		var loading_str = "正在玩命加载";
 	</script>
 	
 	<!--{template footer}-->

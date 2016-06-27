@@ -807,6 +807,25 @@ function get_parent_area()
 	return $parent_area;
 }
 
+
+function get_children_area($areaid)
+{
+	global $db,$table;
+	$data = read_cache('children_area'.'_'.$areaid);
+	if ($data === false) {
+		$sql = "select areaid,areaname from {$table}area where parentid = '$areaid' ";
+		$res = $db->query($sql);
+		while($row=$db->fetchrow($res)) {
+			$children_area[] = $row;
+		}
+		write_cache('children_area'.'_'.$areaid, $children_area);
+	} else {
+		$children_area= $data;
+	}
+	return $children_area;
+}
+
+
 function get_area_list()
 {
 	global $db,$table;

@@ -24,9 +24,9 @@ $areaid = $_REQUEST['area'] ? intval($_REQUEST['area']) : '';
 	header("Location: ./");
 	exit;
 }*/
-if(empty($areaid)){
-	$areaid=1;
-}
+// if(empty($areaid)){
+// 	$areaid=1;
+// }
 
 if($catid) {
 	$cat_info = get_cat_info($catid);
@@ -128,7 +128,7 @@ if($areaid) {
 			//导航条
 			$area_arr = array();
 			foreach($area_row as $val) {
-				$val['areaname'] = $val['name'];
+				$val['areaname'] = $val['areaname'];
 				$val['url'] = url_rewrite('category',array('cid'=>$catid,'eid'=>$val['id']));
 				$area_arr[] = $val;
 			}
@@ -151,7 +151,7 @@ if($areaid) {
 		/* 生成导航 */
 		foreach($area_row as $val) {
 			$val['areaid'] = $val['id'];
-			$val['areaname'] = $val['name'];
+			$val['areaname'] = $val['areaname'];
 			$val['url'] = url_rewrite('category',array('eid'=>$val['id'],'cid'=>$catid));
 			$area_arr[] = $val;
 		}
@@ -167,20 +167,12 @@ if($areaid) {
 	$area_sql = " and areaid in ($areas) ";
 } else {
 	//没有地区，取所有根地区
-	$area_row = get_parent_area();
-	if($area_row) {
-		$area_arr = array();
-		foreach($area_row as $val) {
-			$val['areaname'] = $val['areaname'];
-			$val['url'] = url_rewrite('category', array('cid'=>$catid, 'eid'=>$val['areaid']));
-			$area_arr[] = $val;
+	$area_parents = get_parent_area();
+	$area_children = array();
+	if($area_parents) {
+		foreach($area_parents as $val) {
+			$area_children[$val['areaid']] = get_children_area($val['areaid']);
 		}
-
-		$s_area .= '<select name="area" id="area"><option value="0">请选择</option>';
-		foreach($area_row as $area) {
-			$s_area .= "<option value=$area[areaid]>$area[areaname]</option>";
-		}
-		$s_area .= '</select>';
 	}
 }
 
@@ -218,7 +210,7 @@ if($info) {
 $cat_pro = get_info($cats, $areas, '8', 'pro','','10'); //推荐信息
 $cat_hot = get_info($cats, $areas, '8', '','click','10'); //热门信息
 
-$here = get_here($here_arr);
+// $here = get_here($here_arr);
 $seo['title'] = '新西兰租房 - 新西兰租房网';
 $seo['keywords'] = '新西兰租房 - 新西兰租房网';
 $seo['description'] = '新西兰租房 - 新西兰租房网';

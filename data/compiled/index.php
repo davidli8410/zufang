@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ĞÂÎ÷À¼×â·¿Íø,°Â¿ËÀ¼×â·¿Íø,ĞÂÎ÷À¼ËÑ·¿Íø,°Â¿ËÀ¼×â·¿</title>
-<meta content="ĞÂÎ÷À¼×â·¿,ĞÂÎ÷À¼³ö×â,Ê¨³Ç×â·¿,µ¥¼ä³ö×â,HDB³ö×â,¹«Ô¢³ö×â,¶ÌÆÚ×â·¿,Ê¨³ÇÂÛÌ³,Ê¨³ÇÍø,ĞÂĞÂÍø"
+<meta content="ĞÂÎ÷À¼×â·¿,ĞÂÎ÷À¼³ö×â,Ê¨³Ç×â·¿,µ¥¼ä³ö×â,Õû×â,¹«Ô¢³ö×â,¶ÌÆÚ×â·¿,°Â¿ËÀ¼×â·¿,ĞÂÎ÷À¼×â·¿Íø,°Â¿ËÀ¼×â·¿Íø"
 name="keywords">
-<meta content="ĞÂÎ÷À¼×î´óµÄ×â·¿ÍøÕ¾£¬Ãâ·Ñ·¢²¼¡¢ËÑË÷ĞÂÎ÷À¼³ö×âĞÅÏ¢¡£HDB³ö×â¡¢¹«Ô¢³ö×â¡¢µ¥¼ä³ö×â¡¢ÕûÌ×³ö×â¡£"
+<meta content="ĞÂÎ÷À¼×î´óµÄ×â·¿ÍøÕ¾£¬Ãâ·Ñ·¢²¼¡¢ËÑË÷ĞÂÎ÷À¼³ö×âĞÅÏ¢¡£house³ö×â¡¢¹«Ô¢³ö×â¡¢µ¥¼ä³ö×â¡¢ÕûÌ×³ö×â¡£"
 name="description">
 <meta content="index,follow" name="robots">
 <meta content="index,follow" name="GOOGLEBOT">
@@ -17,7 +17,18 @@ name="description">
 <link rel="stylesheet" href="templates/<?php echo $CFG['tplname'];?>/css/fang.css" type="text/css">
 
 <script type="text/javascript" src="templates/<?php echo $CFG['tplname'];?>/js/e52a1e59defa.js"></script>
+<script type="text/javascript" src="templates/<?php echo $CFG['tplname'];?>/js/cf9075143b4c.js"></script>
 <script type="text/javascript" src="templates/<?php echo $CFG['tplname'];?>/js/fang.js"></script>
+
+<script type="text/javascript">
+
+var show_popover = false;
+var rental_form_error_str = "ÇëÊäÈëÊı×Ö";
+var rental_form_correct_str = "ÊäÈë×îµÍ/×î¸ß¼Û¸ñ";
+
+var preload = true;
+</script>
+
 
 </head>
 <body style="padding-top: 55px;">
@@ -28,100 +39,53 @@ name="description">
 <?php include template(login); ?>
 
 
+<?php include template(register); ?>
+
+
 <div class="container main-shadow">
 <div class="row search-block">
 <div class="col-sm-12">
+
 <div class="row search-tab-row">
 <ul class="nav nav-tabs" id="searchTab">
 <li class="active tab-ui search-tab"><a
-href="http://localhost/zufang/#region-selection"
-data-toggle="tab"><b>ÇøÓò</b></a></li>
+href="http://localhost/"
+data-toggle="tab"><b>°Â¿ËÀ¼</b></a></li>
 </ul>
 <div class="tab-content">
 <div class="tab-pane two-level-selection-block active"
 id="region-selection">
 <div class="two-level-selection-header">
-<div class="two-level-selection-item-selected" id="#central">°Â¿ËÀ¼</div>
-<?php if(is_array($area_arr)) foreach($area_arr AS $val) { ?>
-<div class="two-level-selection-item" id="#area_<?php echo $val['id'];?>"><?php echo $val['areaname'];?></div>
+<?php if(is_array($area_parents)) foreach($area_parents AS $val) { ?>
+<div class="two-level-selection-item" id="#area_<?php echo $val['areaid'];?>"><?php echo $val['areaname'];?></div>
 
 <?php } ?>
 
 </div>
-<div class="two-level-selection-pane-inactive" id="east">
-<div class="text-selection-block">
-<div class="text-selection-item-selected all-selection"
-id="all-region-east">È«²¿</div>
-<div class="text-selection-item" id="Bedok">ÎğÂå</div>
-<div class="text-selection-item" id="Changi">ÕÁÒË</div>
-<div class="text-selection-item" id="Paya Lebar">°ÍÒ®ÀûQ</div>
-<div class="text-selection-item" id="Pasir Ris">°ÍÎ÷Á¢</div>
-<div class="text-selection-item" id="Tampines">µ­±õÄá</div>
-</div>
-</div>
-<div class="two-level-selection-pane-inactive" id="northeast">
-<div class="text-selection-block">
-<div class="text-selection-item-selected all-selection"
-id="all-region-northeast">È«²¿</div>
-<div class="text-selection-item" id="Ang Mo Kio">ºêÃ¯ÇÅ</div>
-<div class="text-selection-item" id="Hougang">ºó¸Û</div>
-<div class="text-selection-item" id="Punggol">°ñ¶ì</div>
-<div class="text-selection-item" id="Seletar">ÊµÀï´ï</div>
-<div class="text-selection-item" id="Sengkang">Ê¢¸Û</div>
-<div class="text-selection-item" id="Serangoon">ÊµÁú¸Ú</div>
-</div>
-</div>
-<div class="two-level-selection-pane-inactive" id="north">
-<div class="text-selection-block">
-<div class="text-selection-item-selected all-selection"
-id="all-region-north">È«²¿</div>
-<div class="text-selection-item" id="Lim Chu Kang">ÁÖØÈ¸Û</div>
-<div class="text-selection-item" id="Mandai">ÍòÀñ</div>
-<div class="text-selection-item" id="Sembawang">Èı°ÍÍú</div>
-<div class="text-selection-item" id="Woodlands">Ø£À¼</div>
-<div class="text-selection-item" id="Yishun">ÒåË³</div>
-</div>
-</div>
-<div class="two-level-selection-pane-active" id="central">
-<div class="text-selection-block">
-<div class="all-selection text-selection-item-selected"
-id="all-region-central">È«²¿</div>
-<div class="text-selection-item" id="Bishan">Penrose</div>
-<div class="text-selection-item" id="Bukit Merah">One
-tree hill</div>
-<div class="text-selection-item" id="Bukit Timah">Mt
-Wellington</div>
-<div class="text-selection-item" id="Geylang">New lynn</div>
-<div class="text-selection-item" id="Kallang">Mt eden</div>
-<div class="text-selection-item" id="Marine Parade">Mt
-eden</div>
-<div class="text-selection-item" id="Novena">Mt eden</div>
-<div class="text-selection-item" id="Queenstown">Mt eden</div>
-<div class="text-selection-item" id="Tanglin">Silva Park</div>
-<div class="text-selection-item" id="Toa Payoh">Mt eden</div>
-<div class="text-selection-item" id="CBD">Mt eden</div>
-<div class="text-selection-item" id="Newton">Mt eden</div>
-<div class="text-selection-item" id="Orchard">Mt eden</div>
-<div class="text-selection-item" id="Outram">Mt eden</div>
-</div>
-</div>
-<div class="two-level-selection-pane-inactive" id="west">
+
+
+<?php if(is_array($area_children)) foreach($area_children AS $parent_id => $child) { ?>
+<div class="two-level-selection-pane-inactive" id="area_<?php echo $parent_id;?>">
 <div class="text-selection-block">
 <div class="text-selection-item-selected all-selection"
 id="all-region-west">È«²¿</div>
-<div class="text-selection-item" id="Bukit Batok">Îä¼ª°Í¶½</div>
-<div class="text-selection-item" id="Bukit Panjang">Îä¼ª°àÈÃ</div>
-<div class="text-selection-item" id="Boon Lay">ÎÄÀñ</div>
-<div class="text-selection-item" id="Choa Chu Kang">²ÌØÈ¸Û</div>
-<div class="text-selection-item" id="Clementi">½ğÎÄÌ©</div>
-<div class="text-selection-item" id="Jurong East">Ô£ÀÈ¶«</div>
-<div class="text-selection-item" id="Jurong West">Ô£ÀÈÎ÷</div>
-<div class="text-selection-item" id="Pioneer">ÏÈÇı</div>
+<?php if(is_array($child)) foreach($child AS $val) { ?>
+<div class="text-selection-item" id="<?php echo $val['areaname'];?>"><?php echo $val['areaname'];?></div>
+
+<?php } ?>
+
+</div>
+</div>
+
+<?php } ?>
+
 </div>
 </div>
 </div>
-</div>
-</div>
+
+
+
+
 <div class="row search-condition-row">
 <div class="col-sm-2 col-xs-2 row-title-div">
 <span class="search-condition-row-title">×âÆÚ</span>
@@ -181,6 +145,11 @@ class="col-sm-10 col-xs-10 text-selection-block house-type-selection selection-b
 </div>
 </div>
 </div>
+
+
+
+
+
 <div class="row post-panel">
 <div class="col-sm-12">
 <div class="result-block" id="post-list">
@@ -285,6 +254,8 @@ var login_modal_alert = "ÍÆËÍ¹¦ÄÜ½«»á°Ñ·ûºÏµ±Ç°ËÑË÷µÄ·¿Ô´Í¨¹ıÓÊ¼ş·¢ËÍ¸øÄú¡£ÇëµÇÂ
 
 var region_prefix = "ÇøÓò£º"
 var mrt_prefix = "MRT: "
+
+var loading_str = "ÕıÔÚÍæÃü¼ÓÔØ";
 </script>
 
 

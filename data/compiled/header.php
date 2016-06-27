@@ -9,7 +9,7 @@ type="button">
 class="icon-bar"></span>
 </button>
 <div style="padding: 9px 10px 9px 0px;">
-<a href="./inex_files/inex.html"><img
+<a href="./"><img
 src="templates/<?php echo $CFG['tplname'];?>/images/logo.png"
 style="height: 32px;" alt="ÐÂÎ÷À¼×â·¿"></a>
 </div>
