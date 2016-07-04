@@ -160,7 +160,7 @@ $(function() {
 		$("#login_result_msg").removeClass("result-text-green");
 		$("#login_result_msg").text(login_form_inprogress_str);
 		$("#login_button_id").attr("disabled", "true");
-		$.post("/login.php?act=act_login", {
+		$.post("login.php?act=act_login", {
 			username_or_email : b,
 			password : a
 		}, function(c) {
@@ -206,7 +206,7 @@ $(function() {
 		user_type = $("input[name*='usertype_radios']:checked").val();
 		$.ajax({
 			type : "POST",
-			url : "/register.php?act=act_register",
+			url : "register.php?act=act_register",
 			data : {
 				username : c,
 				email : b,

@@ -961,6 +961,7 @@ $(function() {
 				+ "/" + is_unit_type + "/" + is_other_type + "/" + post_id
 				+ "/" + post_header_num + "/" + user_type + "/" + language
 				+ "/";
+		alert(a);
 		$.GetHeaders(a, b)
 	};
 	$.PhoneLoad = function(c, a) {
@@ -1253,14 +1254,18 @@ $(function() {
 		
 		region = $(
 		"div.two-level-selection-block.active .two-level-selection-pane-active")
-		.find(".all-selection text-selection-item-selected").attr("id");
-		alert(region);
-		if ($(".two-level-selection-block.active").attr("id") == "region-selection") {
-			region = $(
-					"div.two-level-selection-block.active .two-level-selection-pane-active")
-					.find(".text-selection-item-selected").attr("id");
-			region = region.toLowerCase();
-		} 
+		.find(".text-selection-item-selected").attr("id");
+		
+//		if ($(".two-level-selection-block.active").attr("id") == "region-selection") {
+//			region = $(
+//					"div.two-level-selection-block.active .two-level-selection-pane-active")
+//					.find(".text-selection-item-selected").attr("id");
+//			region = region.toLowerCase();
+//		} 
+//		
+		term = $("div.text-selection-block.term-selection").find(
+		".text-selection-item-selected").attr("id");
+		
 		min_price = $("#min_rental").val();
 		max_price = $("#max_rental").val();
 		if ($("#negotiable-checkbox").is(":checked")) {
@@ -1269,8 +1274,7 @@ $(function() {
 			is_negotiable = "0"
 		}
 		
-		term = $("div.text-selection-block.term-selection").find(
-				".text-selection-item-selected").attr("id");
+		
 		is_share_type = "0";
 		is_common_type = "0";
 		is_master_type = "0";
@@ -1313,11 +1317,12 @@ $(function() {
 			}
 		}
 	};
-	$(
-			".text-selection-item, .text-selection-item-selected, .two-level-selection-item, .two-level-selection-item-selected, .search-tab")
-			.click(function(b) {
-				$.NewSearch()
-			});
+	
+	
+	$(".text-selection-item, .text-selection-item-selected, .two-level-selection-item, .two-level-selection-item-selected, .search-tab")
+		.click(function(b) {
+		$.NewSearch()
+	});
 	$("#min_rental, #max_rental, #negotiable-checkbox").change(function() {
 		$.NewSearch()
 	});
