@@ -164,36 +164,28 @@ $(function() {
 		$.ajax({
 		    url: '/api/rent/login',
 		    type: 'post',
-		    data: {
-		        userName : b,
-				password : a
-		    },
+		    dataType: 'json',
+		    data: JSON.stringify({userName : b,password : a}),
 		    headers: {
 		        'Content-Type': 'application/json',   
 		    },
-		    dataType: 'json',
 		    success: function (c) {
 		        $("#login_indicator").css("display", "none");
-				if (c.login_status == "SCMD_LOGIN_WRONG") {
+				if (c.code != 1000) {
 					$("#login_result_msg").removeClass("result-text-green");
 					$("#login_result_msg").addClass("result-text-red");
 					$("#login_result_msg").text(login_form_error_str)
 				} else {
-					if (c.login_status == "SCMD_LOGIN_SUCCEED"
-							|| c.login_status == "SCMD_LOGIN_ONE_TIME") {
+					if (c.code == 1000) {
 						$("#login_result_msg").removeClass("result-text-red");
 						$("#login_result_msg").addClass("result-text-green");
-						if (c.login_status == "SCMD_LOGIN_SUCCEED") {
-							$("#login_result_msg").text(login_form_correct_str)
-						} else {
-							$("#login_result_msg").text(login_form_onetime_str)
-						}
+						$("#login_result_msg").text(login_form_correct_str)
 						login_status = true;
 						setTimeout(function() {
 							$("#login_modal").modal("hide")
 						}, 1500);
-						if (c.login_status == "SCMD_LOGIN_SUCCEED") {
-							location.reload();
+						if (c.code == 1000) {
+							//location.reload();
 						} else {
 							window.location = "/web/account/"
 						}
