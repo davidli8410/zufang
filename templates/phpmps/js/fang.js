@@ -77,6 +77,7 @@ $(function() {
 //				} else {
 //					$("#login_email").parent().removeClass("has-error")
 //				}
+				$("#login_email").parent().removeClass("has-error")
 				if (password.length < PASSWORD_MIN_LENGTH
 						|| password.length > PASSWORD_MAX_LENGTH) {
 					$("#login_password").parent().addClass("has-error");
@@ -102,8 +103,8 @@ $(function() {
 						|| username.length > USERNAME_MAX_LENGTH) {
 					$("#register_username").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					//var a = b.format(username_error_msg);
-					$("#register-error-msg-list").append(username_error_msg);
+					var a = b.format(username_error_msg);
+					$("#register-error-msg-list").append(a);
 					pass = false
 				} else {
 					$("#register_username").parent().removeClass("has-error")
@@ -111,8 +112,8 @@ $(function() {
 				if (validateEmail(email) == false) {
 					$("#register_email").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					//var a = b.format(email_error_msg);
-					$("#register-error-msg-list").append(email_error_msg);
+					var a = b.format(email_error_msg);
+					$("#register-error-msg-list").append(a);
 					pass = false
 				} else {
 					$("#register_email").parent().removeClass("has-error")
@@ -121,8 +122,8 @@ $(function() {
 						|| password.length > PASSWORD_MAX_LENGTH) {
 					$("#register_password").parent().addClass("has-error");
 					var b = $("#error-msg-template").html();
-					//var a = b.format(password_error_msg);
-					$("#register-error-msg-list").append(password_error_msg);
+					var a = b.format(password_error_msg);
+					$("#register-error-msg-list").append(a);
 					pass = false
 				} else {
 					$("#register_password").parent().removeClass("has-error")
@@ -160,47 +161,43 @@ $(function() {
 		$("#login_result_msg").removeClass("result-text-green");
 		$("#login_result_msg").text(login_form_inprogress_str);
 		$("#login_button_id").attr("disabled", "true");
-		
-		$.ajax({
-		    url: '/api/rent/login',
-		    type: 'post',
-		    dataType: 'json',
-		    data: JSON.stringify({userName : b,password : a}),
-		    headers: {
-		        'Content-Type': 'application/json',   
-		    },
-		    success: function (c) {
-		        $("#login_indicator").css("display", "none");
-				if (c.code != 1000) {
+		$.post("/zufang/login.php?act=act_login", {
+			username_or_email : b,
+			password : a
+		}, function(c) {
+			$("#login_indicator").css("display", "none");
+			if (c.login_status == "SCMD_LOGIN_WRONG") {
+				$("#login_result_msg").removeClass("result-text-green");
+				$("#login_result_msg").addClass("result-text-red");
+				$("#login_result_msg").text(login_form_error_str)
+			} else {
+				if (c.login_status == "SCMD_LOGIN_SUCCEED"
+						|| c.login_status == "SCMD_LOGIN_ONE_TIME") {
+					$("#login_result_msg").removeClass("result-text-red");
+					$("#login_result_msg").addClass("result-text-green");
+					if (c.login_status == "SCMD_LOGIN_SUCCEED") {
+						$("#login_result_msg").text(login_form_correct_str)
+					} else {
+						$("#login_result_msg").text(login_form_onetime_str)
+					}
+					login_status = true;
+					setTimeout(function() {
+						$("#login_modal").modal("hide")
+					}, 1500);
+					if (c.login_status == "SCMD_LOGIN_SUCCEED") {
+						location.reload()
+					} else {
+						window.location = "/web/account/"
+					}
+				} else {
 					$("#login_result_msg").removeClass("result-text-green");
 					$("#login_result_msg").addClass("result-text-red");
-					$("#login_result_msg").text(login_form_error_str)
-				} else {
-					if (c.code == 1000) {
-						$("#login_result_msg").removeClass("result-text-red");
-						$("#login_result_msg").addClass("result-text-green");
-						$("#login_result_msg").text(login_form_correct_str)
-						login_status = true;
-						setTimeout(function() {
-							$("#login_modal").modal("hide")
-						}, 1500);
-						if (c.code == 1000) {
-							//location.reload();
-						} else {
-							window.location = "/web/account/"
-						}
-					} else {
-						$("#login_result_msg").removeClass("result-text-green");
-						$("#login_result_msg").addClass("result-text-red");
-						$("#login_result_msg").text(unknown_error_str)
-					}
+					$("#login_result_msg").text(unknown_error_str)
 				}
-				$("#login_button_id").removeAttr("disabled")
-		    }
-		});
-		
+			}
+			$("#login_button_id").removeAttr("disabled")
+		}, "json")
 	};
-	
 	$.Register = function(c, b, a) {
 		$("#register_indicator").css("display", "inline");
 		$("#register_result_msg").removeClass("result-text-red");
@@ -210,11 +207,12 @@ $(function() {
 		user_type = $("input[name*='usertype_radios']:checked").val();
 		$.ajax({
 			type : "POST",
-			url : "register.php?act=act_register",
+			url : "/web/register/",
 			data : {
 				username : c,
 				email : b,
-				password : a
+				password : a,
+				user_type : user_type
 			},
 			success : function(d) {
 				$("#register_indicator").css("display", "none");
@@ -241,8 +239,8 @@ $(function() {
 							$("#register_result_msg").text(
 									register_form_correct_str);
 							setTimeout(function() {
-								location.reload();
-							}, 500);
+								window.location = "/web/account/"
+							}, 4000)
 						} else {
 							$("#register_result_msg").removeClass(
 									"result-text-green");
