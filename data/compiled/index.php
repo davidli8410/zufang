@@ -48,7 +48,7 @@ var preload = true;
 
 <div class="row search-tab-row">
 <ul class="nav nav-tabs" id="searchTab">
-<li class="active tab-ui search-tab"><a
+<li class="active tab-ui search-tab" id="ack"><a
 href="http://localhost/"
 data-toggle="tab"><b>°Â¿ËÀ¼</b></a></li>
 </ul>
@@ -67,8 +67,6 @@ id="region-selection">
 <?php if(is_array($area_children)) foreach($area_children AS $parent_id => $child) { ?>
 <div class="two-level-selection-pane-inactive" id="area_<?php echo $parent_id;?>">
 <div class="text-selection-block">
-<div class="text-selection-item-selected all-selection"
-id="all-region-west">È«²¿</div>
 <?php if(is_array($child)) foreach($child AS $val) { ?>
 <div class="text-selection-item" id="<?php echo $val['areaname'];?>"><?php echo $val['areaname'];?></div>
 

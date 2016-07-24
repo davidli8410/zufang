@@ -925,7 +925,7 @@ $(function() {
 		window.scrollTo(0, 0)
 	})
 });
-var region = "", mrt = "", min_price = "", max_price = "", term = "", is_share_type = "";
+var city = "", district = "", region = "", mrt = "", min_price = "", max_price = "", term = "", is_share_type = "";
 var is_common_type = "", is_master_type = "", is_unit_type = "", is_other_type = "";
 var post_id = "", post_header_num = "", user_type = "", language = "";
 var include_negotiable = true;
@@ -955,12 +955,14 @@ $(function() {
 		if (b == "new") {
 			post_id = "0"
 		}
-		var a = "/PR/FI/" + region + "/" + mrt + "/" + min_price + "/"
-				+ max_price + "/" + is_negotiable + "/" + term + "/"
-				+ is_share_type + "/" + is_common_type + "/" + is_master_type
-				+ "/" + is_unit_type + "/" + is_other_type + "/" + post_id
-				+ "/" + post_header_num + "/" + user_type + "/" + language
-				+ "/";
+//		var a = "/api/page/" + city + "/" + region + "/" + min_price + "/"
+//				+ max_price + "/" + is_negotiable + "/" + term + "/"
+//				+ is_share_type + "/" + is_common_type + "/" + is_master_type
+//				+ "/" + is_unit_type + "/" + is_other_type + "/" + post_id
+//				+ "/" + post_header_num + "/" + user_type + "/";
+		
+		var a = "/api/page/" + city + "/" + region;
+		
 		alert(a);
 		$.GetHeaders(a, b)
 	};
@@ -1251,10 +1253,21 @@ $(function() {
 		}
 	};
 	$.getParameters = function() {
+		city = $("div.search-tab-row").find(".search-tab").attr("id");
 		
-		region = $(
-		"div.two-level-selection-block.active .two-level-selection-pane-active")
+		district = $("div.two-level-selection-block.active .two-level-selection-header")
+		.find(".two-level-selection-item-selected").attr("id");
+		
+		if (typeof(district) == "undefined"){
+			district = "*";
+		}
+		
+		region = $("div.two-level-selection-block.active .two-level-selection-pane-active")
 		.find(".text-selection-item-selected").attr("id");
+		
+		if (typeof(region) == "undefined"){
+			region = "*";
+		}
 		
 //		if ($(".two-level-selection-block.active").attr("id") == "region-selection") {
 //			region = $(
