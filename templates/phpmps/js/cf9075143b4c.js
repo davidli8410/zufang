@@ -925,7 +925,7 @@ $(function() {
 		window.scrollTo(0, 0)
 	})
 });
-var city = "", district = "", region = "", mrt = "", min_price = "", max_price = "", term = "", is_share_type = "";
+var city = "", district = "", region = "", mrt = "", minprice = "", maxprice = "", duration = "", rmtype = "";
 var is_common_type = "", is_master_type = "", is_unit_type = "", is_other_type = "";
 var post_id = "", post_header_num = "", user_type = "", language = "";
 var include_negotiable = true;
@@ -953,255 +953,170 @@ $(function() {
 	};
 	$.GeneralLoad = function(b) {
 		if (b == "new") {
-			post_id = "0"
+			post_id = "1"
 		}
-//		var a = "/api/page/" + city + "/" + region + "/" + min_price + "/"
-//				+ max_price + "/" + is_negotiable + "/" + term + "/"
+//		var a = "/api/page/" + city + "/" + region + "/" + minprice + "/"
+//				+ maxprice + "/" + is_negotiable + "/" + term + "/"
 //				+ is_share_type + "/" + is_common_type + "/" + is_master_type
 //				+ "/" + is_unit_type + "/" + is_other_type + "/" + post_id
 //				+ "/" + post_header_num + "/" + user_type + "/";
 		
-		var a = "/api/page/" + city + "/" + region;
+		var a = "/api/page/" + city + "/" + district + "/" + region + "/"
+				+ duration + "/" + minprice + "/" + maxprice + "/" + rmtype + "/" + post_id;
 		
-		alert(a);
+		//alert(a);
 		$.GetHeaders(a, b)
 	};
 	$.PhoneLoad = function(c, a) {
 		if (c == "new") {
-			post_id = "0"
+			post_id = "1"
 		}
 		var b = "/PR/FBP/" + a + "/" + post_id + "/" + post_header_num + "/";
 		$.GetHeaders(b, c)
 	};
 	$.GetHeaders = function(a, b) {
-		$
-				.getJSON(
-						a,
-						function(c) {
-							$
-									.each(
-											c,
-											function(j, u) {
-												post_id = u.post_id;
-												var g = u.title;
-												if (g == "") {
-													g = no_title_str
-												} else {
-													g = $.ShortenTitle(g, 60)
-												}
-												var m = "";
-												var k = false;
-												if (u.is_share_type == "1") {
-													m += share_str;
-													k = true
-												}
-												if (u.is_common_type == "1") {
-													if (k) {
-														m += "|"
-													}
-													m += common_str;
-													k = true
-												}
-												if (u.is_master_type == "1") {
-													if (k) {
-														m += "|"
-													}
-													m += master_str;
-													k = true
-												}
-												if (u.is_unit_type == "1") {
-													if (k) {
-														m += "|"
-													}
-													m += unit_str;
-													k = true
-												}
-												if (u.is_other_type == "1") {
-													if (k) {
-														m += "|"
-													}
-													m += other_str;
-													k = true
-												}
-												var e = "";
-												var n = u.time
-														.replace(" ", "T");
-												var t = Date.parse(Date())
-														- Date.parse(n);
-												var h = Math
-														.floor(t / 86400000);
-												if (h > 0) {
-													e = h.toString() + " "
-															+ day_postfix
-												} else {
-													var s = Math
-															.floor(t / 3600000);
-													if (s > 0) {
-														e = s.toString() + " "
-																+ hour_postfix
-													} else {
-														var q = Math
-																.floor(t / 60000);
-														if (q < 0) {
-															q = 0
-														}
-														e = q.toString() + " "
-																+ min_postfix
-													}
-												}
-												var f = "";
-												var v = "";
-												if (u.user_type == "landlord") {
-													f = owner_str;
-													v = "success"
-												} else {
-													if (u.user_type == "agent") {
-														f = agent_str;
-														v = "warning"
-													}
-												}
-												var d = u.price;
-												var r = "";
-												var o = "";
-												if (u.term == "day") {
-													r = term_day_str;
-													o = price_day_postfix
-												} else {
-													r = term_month_str;
-													o = price_month_postfix
-												}
-												if (d == "0") {
-													d = "";
-													o = rental_unknown_str
-												}
-												var p = "";
-												var i = "none";
-												if (u.source.substring(0, 3) == "sgc") {
-													p = sgc_str
-												} else {
-													if (u.source
-															.substring(0, 5) == "sgxin") {
-														p = sgxin_str
-													} else {
-														if (u.source.substring(
-																0, 5) == "xinyu") {
-															p = xinyu_str
-														} else {
-															if (u.source
-																	.substring(
-																			0,
-																			5) == "sofun") {
-																p = sofun_str
-															} else {
-																if (u.source
-																		.substring(
-																				0,
-																				6) == "sgyuan") {
-																	p = sgyuan_str
-																} else {
-																	if (u.source
-																			.substring(
-																					0,
-																					6) == "sgroom") {
-																		p = sgroom_str;
-																		i = "post-block-highlight"
-																	} else {
-																		if (u.source
-																				.substring(
-																						0,
-																						6) == "zufang") {
-																			p = zufang_str
-																		} else {
-																			if (u.source
-																					.substring(
-																							0,
-																							7) == "huasing") {
-																				p = huasing_str
-																			} else {
-																				if (u.source
-																						.substring(
-																								0,
-																								7) == "roomsdb") {
-																					p = roomsdb_str
-																				} else {
-																					if (u.source
-																							.substring(
-																									0,
-																									7) == "gumtree") {
-																						p = gumtree_str
-																					} else {
-																						if (u.source
-																								.substring(
-																										0,
-																										7) == "soufang") {
-																							p = soufang_str
-																						} else {
-																							if (u.source
-																									.substring(
-																											0,
-																											7) == "singxin") {
-																								p = singxin_str
-																							} else {
-																								if (u.source
-																										.substring(
-																												0,
-																												8) == "singfang") {
-																									p = soufang_str
-																								} else {
-																									if (u.source
-																											.substring(
-																													0,
-																													11) == "shichengbbs") {
-																										p = shichengbbs_str
-																									} else {
-																										p = ""
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-												is_top_display = "none";
-												not_top_display = "inline";
-												if (u.is_top == "1") {
-													is_top_display = "inline";
-													not_top_display = "none"
-												}
-												has_image_display = "none";
-												if (u.has_image == "1") {
-													has_image_display = "inline"
-												}
-												var l = $("#post-template")
-														.html();
-												var w = l.format(
-														is_top_display, i,
-														u.post_id, g, d, o, m,
-														r, v, f, p, e,
-														has_image_display,
-														not_top_display);
-												$("#post-list").append(w)
-											});
-							$.SetLoadingStatus(false);
-							if (c.length == 0) {
-								if (b == "new") {
-									$("#loading-text").text(
-											search_no_result_str)
-								} else {
-									$("#loading-text").text(
-											search_no_more_result_str)
-								}
-							} else {
-								$("#loading-text").text(search_normal_str)
-							}
-						})
+		$.getJSON(a, function(c) {
+			$.each(c, function(j, u) {
+				
+				post_id = post_id + 1;
+				var title = u.title;
+				var price = u.price;
+				var district= u.district;
+				var suburb= u.suburb;
+				var type = u.type;
+//				if (g == "") {
+//					g = no_title_str
+//				} else {
+//					g = $.ShortenTitle(g, 60)
+//				}
+//				var m = "";
+//				var k = false;
+//				if (u.is_share_type == "1") {
+//					m += share_str;
+//					k = true
+//				}
+//				if (u.is_common_type == "1") {
+//					if (k) {
+//						m += "|"
+//					}
+//					m += common_str;
+//					k = true
+//				}
+//				if (u.is_master_type == "1") {
+//					if (k) {
+//						m += "|"
+//					}
+//					m += master_str;
+//					k = true
+//				}
+//				if (u.is_unit_type == "1") {
+//					if (k) {
+//						m += "|"
+//					}
+//					m += unit_str;
+//					k = true
+//				}
+//				if (u.is_other_type == "1") {
+//					if (k) {
+//						m += "|"
+//					}
+//					m += other_str;
+//					k = true
+//				}
+//				var e = "";
+//				var n = u.time
+//						.replace(" ", "T");
+//				var t = Date.parse(Date())
+//						- Date.parse(n);
+//				var h = Math
+//						.floor(t / 86400000);
+//				if (h > 0) {
+//					e = h.toString() + " "
+//							+ day_postfix
+//				} else {
+//					var s = Math
+//							.floor(t / 3600000);
+//					if (s > 0) {
+//						e = s.toString() + " "
+//								+ hour_postfix
+//					} else {
+//						var q = Math
+//								.floor(t / 60000);
+//						if (q < 0) {
+//							q = 0
+//						}
+//						e = q.toString() + " "
+//								+ min_postfix
+//					}
+//				}
+//				var f = "";
+//				var v = "";
+//				if (u.user_type == "landlord") {
+//					f = owner_str;
+//					v = "success"
+//				} else {
+//					if (u.user_type == "agent") {
+//						f = agent_str;
+//						v = "warning"
+//					}
+//				}
+//				var d = u.price;
+//				var r = "";
+//				var o = "";
+//				if (u.term == "day") {
+//					r = term_day_str;
+//					o = price_day_postfix
+//				} else {
+//					r = term_month_str;
+//					o = price_month_postfix
+//				}
+//				if (d == "0") {
+//					d = "";
+//					o = rental_unknown_str
+//				}
+//				var p = "";
+//				var i = "none";
+//				if (u.source.substring(0, 3) == "sgc") {
+//					p = sgc_str
+//				} else {}
+//				is_top_display = "none";
+//				not_top_display = "inline";
+//				if (u.is_top == "1") {
+//					is_top_display = "inline";
+//					not_top_display = "none"
+//				}
+//				has_image_display = "none";
+//				if (u.has_image == "1") {
+//					has_image_display = "inline"
+//				}
+//				var l = $("#post-template")
+//						.html();
+//				var w = l.format(
+//						is_top_display, i,
+//						u.post_id, g, d, o, m,
+//						r, v, f, p, e,
+//						has_image_display,
+//						not_top_display);
+//				$("#post-list").append(w)
+				
+				var l = $("#post-template").html();
+				var w = l.format("inline", "","c", title, district, "g", type,price, "success", suburb, "p", "e","inline","not_top_display");
+				$("#post-list").append(w)
+				
+			});
+			$.SetLoadingStatus(false);
+			if (c.length == 0) {
+				if (b == "new") {
+					$("#loading-text").text(
+							search_no_result_str)
+				} else {
+					$("#loading-text").text(
+							search_no_more_result_str)
+				}
+			} else {
+				$("#loading-text").text(search_normal_str)
+			}
+		})
 	};
 	$.ClearPost = function() {
 		$("#post-list").html("")
@@ -1230,13 +1145,13 @@ $(function() {
 		$(this).tab("show")
 	});
 	$.validateSearchConditions = function() {
-		min_price = $("#min_rental").val();
-		max_price = $("#max_rental").val();
-		if (isNumber(min_price) != true || isNumber(max_price != true)) {
-			if (isNumber(min_price) != true) {
+		minprice = $("#min_rental").val();
+		maxprice = $("#max_rental").val();
+		if (isNumber(minprice) != true || isNumber(maxprice != true)) {
+			if (isNumber(minprice) != true) {
 				$("#min_rental").parent().addClass("has-error")
 			}
-			if (isNumber(max_price) != true) {
+			if (isNumber(maxprice) != true) {
 				$("#max_rental").parent().addClass("has-error")
 			}
 			$("#rental_validation_msg").removeClass("validation-text-green");
@@ -1257,78 +1172,34 @@ $(function() {
 		
 		district = $("div.two-level-selection-block.active .two-level-selection-header")
 		.find(".two-level-selection-item-selected").attr("id");
-		
 		if (typeof(district) == "undefined"){
 			district = "*";
+		}else{
+			district = district.substring(6);
 		}
 		
 		region = $("div.two-level-selection-block.active .two-level-selection-pane-active")
 		.find(".text-selection-item-selected").attr("id");
-		
 		if (typeof(region) == "undefined"){
 			region = "*";
 		}
 		
-//		if ($(".two-level-selection-block.active").attr("id") == "region-selection") {
-//			region = $(
-//					"div.two-level-selection-block.active .two-level-selection-pane-active")
-//					.find(".text-selection-item-selected").attr("id");
-//			region = region.toLowerCase();
-//		} 
-//		
-		term = $("div.text-selection-block.term-selection").find(
+		duration = $("div.text-selection-block.term-selection").find(
 		".text-selection-item-selected").attr("id");
 		
-		min_price = $("#min_rental").val();
-		max_price = $("#max_rental").val();
-		if ($("#negotiable-checkbox").is(":checked")) {
-			is_negotiable = "1"
-		} else {
-			is_negotiable = "0"
-		}
+		
+		minprice = $("#min_rental").val();
+		maxprice = $("#max_rental").val();
+//		if ($("#negotiable-checkbox").is(":checked")) {
+//			is_negotiable = "1"
+//		} else {
+//			is_negotiable = "0"
+//		}
+		
+		rmtype = $("div.text-selection-block.house-type-selection").find(
+		".text-selection-item-selected").attr("id");
 		
 		
-		is_share_type = "0";
-		is_common_type = "0";
-		is_master_type = "0";
-		is_unit_type = "0";
-		is_other_type = "0";
-		if ($("div.text-selection-block.house-type-selection").find(
-				".text-selection-item-selected").attr("id") == "any") {
-			is_share_type = "1";
-			is_common_type = "1";
-			is_master_type = "1";
-			is_unit_type = "1";
-			is_other_type = "1"
-		} else {
-			if ($("div.text-selection-block.house-type-selection").find(
-					".text-selection-item-selected").attr("id") == "share") {
-				is_share_type = "1"
-			} else {
-				if ($("div.text-selection-block.house-type-selection").find(
-						".text-selection-item-selected").attr("id") == "common") {
-					is_common_type = "1"
-				} else {
-					if ($("div.text-selection-block.house-type-selection")
-							.find(".text-selection-item-selected").attr("id") == "master") {
-						is_master_type = "1"
-					} else {
-						if ($("div.text-selection-block.house-type-selection")
-								.find(".text-selection-item-selected").attr(
-										"id") == "unit") {
-							is_unit_type = "1"
-						} else {
-							if ($(
-									"div.text-selection-block.house-type-selection")
-									.find(".text-selection-item-selected")
-									.attr("id") == "other") {
-								is_other_type = "1"
-							}
-						}
-					}
-				}
-			}
-		}
 	};
 	
 	
@@ -1413,8 +1284,8 @@ $(function() {
 					data : {
 						region : region,
 						mrt : mrt,
-						min_price : min_price,
-						max_price : max_price,
+						minprice : minprice,
+						maxprice : maxprice,
 						is_negotiable : is_negotiable,
 						term : term,
 						is_share_type : is_share_type,
@@ -1518,5 +1389,5 @@ $(function() {
 });
 $(function() {
 	$.SwitchSelection("all-region-central", "any", "any");
-	post_id = 2447314;
+	post_id = 1;
 })

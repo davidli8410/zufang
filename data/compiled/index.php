@@ -68,7 +68,8 @@ id="region-selection">
 <div class="two-level-selection-pane-inactive" id="area_<?php echo $parent_id;?>">
 <div class="text-selection-block">
 <?php if(is_array($child)) foreach($child AS $val) { ?>
-<div class="text-selection-item" id="<?php echo $val['areaname'];?>"><?php echo $val['areaname'];?></div>
+<div class="text-selection-item-selected all-selection"	id="*">全部</div>
+<div class="text-selection-item" id="<?php echo $val['areaid'];?>"><?php echo $val['areaname'];?></div>
 
 <?php } ?>
 
@@ -90,9 +91,9 @@ id="region-selection">
 </div>
 <div
 class="col-sm-10 col-xs-10 text-selection-block term-selection selection-block">
-<div class="text-selection-item-selected" id="any">任意租期</div>
-<div class="text-selection-item" id="month">长租</div>
-<div class="text-selection-item" id="day">短租</div>
+<div class="text-selection-item-selected" id="*">任意租期</div>
+<div class="text-selection-item" id="m">长租</div>
+<div class="text-selection-item" id="w">短租</div>
 </div>
 </div>
 <div class="row search-condition-row">
@@ -118,12 +119,12 @@ id="max_rental" value="9999"
 onblur="if (this.value == &#39;&#39;) {this.value = &#39;9999&#39;;}"
 onfocus="if (this.value == &#39;9999&#39;) {this.value = &#39;&#39;;}">
 </div>
-<div class="checkbox"
+<!-- <div class="checkbox"
 style="display: inline-block; vertical-align: top; margin: 5px;">
 <label id="label-negotiable"> <input type="checkbox"
 id="negotiable-checkbox" checked=""> 可商
 </label>
-</div>
+</div> -->
 </form>
 </div>
 </div>
@@ -133,8 +134,8 @@ id="negotiable-checkbox" checked=""> 可商
 </div>
 <div
 class="col-sm-10 col-xs-10 text-selection-block house-type-selection selection-block">
-<div class="text-selection-item-selected" id="any">任意房型</div>
-<div class="text-selection-item" id="share">搭房</div>
+<div class="text-selection-item-selected" id="*">任意房型</div>
+<div class="text-selection-item" id="share">床位</div>
 <div class="text-selection-item" id="common">普通房</div>
 <div class="text-selection-item" id="master">主人房</div>
 <div class="text-selection-item" id="unit">整套</div>
@@ -177,7 +178,7 @@ style="text-align: left;">
 </div>
 <div class="col-sm-1 col-xs-2 post-info-item"
 style="text-align: left;">
-<span class="label label-success" style="display: inline;">房东</span>
+<span class="label label-success" style="display: inline;">Penrose</span>
 </div>
 <div class="col-sm-2 col-xs-6 post-info-item"
 style="text-align: right;">
@@ -258,6 +259,10 @@ var loading_str = "正在玩命加载";
 
 
 <?php include template(footer); ?>
+
+
+<?php include template(item_template); ?>
+
 
 </body>
 </html>
