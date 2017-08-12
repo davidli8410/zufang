@@ -206,7 +206,7 @@ $(function() {
 		user_type = $("input[name*='usertype_radios']:checked").val();
 		$.ajax({
 			type : "POST",
-			url : "/register.php?act=act_register",
+			url : "register.php?act=act_register",
 			data : {
 				username : c,
 				email : b,
