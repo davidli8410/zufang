@@ -304,7 +304,7 @@ $(function() {
 		var p = $("#ad-phone").val();
 		$.ajax({
 			type : "POST",
-			url : "http://localhost/zufang_master/postwyy.php",
+			url : "http://localhost/zufang_master/post_Ian.php",
 			data : {
 				phone : p
 			},
