@@ -11,30 +11,30 @@
 			<div style="padding: 9px 10px 9px 0px;">
 				<a href="./"><img
 					src="templates/{$CFG[tplname]}/images/logo.png"
-					style="height: 32px;" alt="ĞÂÎ÷À¼×â·¿"></a>
+					style="height: 32px;" alt="æ–°è¥¿å…°ç§Ÿæˆ¿"></a>
 			</div>
 		</div>
 		<div class="navbar-collapse collapse bs-navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right" id="navbar-right-links">
-				<li><a href="{$CFG[postfile]}" id="post_ad_link"><span
-						class="glyphicon glyphicon-edit"></span>&nbsp;Ãâ·Ñ·¢²¼</a></li>
+				<li><a href="./templates/phpmps/post_static.htm" id="post_ad_link"><span
+						class="glyphicon glyphicon-edit"></span>&nbsp;å…è´¹å‘å¸ƒ</a></li>
 
 				<!--{if $_userid}-->
-				<li class="before-login-link"><a href="member.php">»¶Ó­Äã£º{$_username}</a></li>
+				<li class="before-login-link"><a href="member.php">æ¬¢è¿ä½ ï¼š{$_username}</a></li>
 				{if $_status<=0}
 				<li class="before-login-link" id="login_link"><a
-					href="member.php?act=send_check_email">[ÑéÖ¤ÓÊ¼ş]</a></li> {/if}
+					href="member.php?act=send_check_email">[éªŒè¯é‚®ä»¶]</a></li> {/if}
 				<li class="before-login-link"><a
-					href="member.php?act=logout&mid={$_userid}">[ÍË³ö]</a></li>
+					href="member.php?act=logout&mid={$_userid}">[é€€å‡º]</a></li>
 				<!--{else}-->
 				<li class="before-login-link" id="login_link">
-					<!--<a href="member.php?act=login&refer={$PHP_URL}">µÇÂ¼</a> -->
-					<a href="javascript:void(0)">µÇÂ¼</a>
+					<!--<a href="member.php?act=login&refer={$PHP_URL}">ç™»å½•</a> -->
+					<a href="javascript:void(0)">ç™»å½•</a>
 				</li>
 				<li class="before-login-link" id="register_link">
-					<!-- <a href="member.php?act=register">×¢²á</a> -->
-					<a href="javascript:void(0)">×¢²á</a>
+					<!-- <a href="member.php?act=register">æ³¨å†Œ</a> -->
+					<a href="javascript:void(0)">æ³¨å†Œ</a>
 				</li>
 				<!--{/if}-->
 			</ul>

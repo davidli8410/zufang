@@ -206,7 +206,7 @@ $(function() {
 		user_type = $("input[name*='usertype_radios']:checked").val();
 		$.ajax({
 			type : "POST",
-			url : "/register.php?act=act_register",
+			url : "register.php?act=act_register",
 			data : {
 				username : c,
 				email : b,
@@ -295,6 +295,21 @@ $(function() {
 	$("#login_modal").on("hide.bs.modal", function() {
 		$("#login_modal_msg").text(login_modal_normal_msg)
 	})
+	$("#postbutton").click(function(c){
+//		window.alert("firstone");
+		var p = $("#ad-phone").val();
+		$.ajax({
+			type : "POST",
+			url : "http://localhost/zufang_master/post_Ian.php",
+			data : {
+				phone : p
+			},
+			success : function(a) {
+				alert(a)
+			},
+			async : true
+		})
+	}) 
 });
 $(window).on("resize load", function() {
 	$("body").css({
